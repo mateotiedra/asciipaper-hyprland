@@ -18,7 +18,9 @@ import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-WIDTH, HEIGHT, FPS = 1280, 720, 24
+# Render the shipped cell grid at the approved desktop's native resolution;
+# only encoded animations are downscaled, never the PNG evidence.
+WIDTH, HEIGHT, FPS = 2880, 1800, 24
 SECONDS, WARMUP = 8, 2
 # One second into the recording (three seconds into simulation): the pointer
 # fish sits above/right of the video shark, keeping both subjects distinct.
@@ -105,10 +107,11 @@ def render(stage, destination):
         ffmpeg = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
                   "-filter_complex_threads", "1"]
         filters = (
-            "[0:v]split=3[movie][overview][detail];"
+            "[0:v]split=3[fullmovie][overview][detail];"
+            "[fullmovie]scale=1440:900:flags=lanczos[movie];"
             f"[overview]select=eq(n\\,{POSTER_FRAME})[poster];"
             f"[detail]select=eq(n\\,{POSTER_FRAME}),"
-            "crop=640:360:640:80[closeup]"
+            "crop=960:600:1550:330[closeup]"
         )
         encode_command = [
             *ffmpeg, "-f", "rawvideo", "-pixel_format", "rgba",
@@ -149,7 +152,7 @@ def render(stage, destination):
         subprocess.run([
             *ffmpeg, "-i", str(work / "demo.mp4"),
             "-filter_complex",
-            "fps=12,scale=960:-1:flags=lanczos,split[a][b];"
+            "fps=12,scale=1280:-1:flags=lanczos,split[a][b];"
             "[a]palettegen=max_colors=96:stats_mode=diff[p];"
             "[b][p]paletteuse=dither=bayer:bayer_scale=3:diff_mode=rectangle",
             "-an", "-map_metadata", "-1", "-fflags", "+bitexact",
