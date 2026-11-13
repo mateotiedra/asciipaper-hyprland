@@ -1,0 +1,11 @@
+{
+  "engine": {
+    "url": "https://github.com/cYoren/asciipaper-engine.git",
+    "revision": "0338b7d0a026c42027b9880537ab8c91b9c63adc"
+  },
+  "protocols": {
+    "url": "https://github.com/wayland-mirror/wayland-protocols.git",
+    "revision": "ee78491a237eaff9389a0ccf8680521d074407d3",
+    "version": "1.49"
+  }
+}

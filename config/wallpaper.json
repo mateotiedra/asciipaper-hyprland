@@ -1,0 +1,31 @@
+{
+  "title": "Terminal Pink — Sharks in the Matrix",
+  "shader": "wallpaper.glsl",
+  "media": "media/shark-loop.mkv",
+  "charset": " .,:;i+=xX#@",
+  "font": "FantasqueSansM Nerd Font Mono, DejaVu Sans Mono",
+  "cell": 12,
+  "aspect": 0.55,
+  "fill": 0,
+  "background": "#101014",
+  "effects": {},
+  "interaction": "none",
+  "uniforms": {
+    "matrixBrightness": 0.7,
+    "matrixDensity": 2.3,
+    "matrixSpeed": 2.3,
+    "matrixTrailLength": 5,
+    "matrixChangeInterval": 2.4,
+    "lens": 0,
+    "contrast": 4.0,
+    "brightness": 1.41,
+    "gamma": 1,
+    "threshold": 0.16,
+    "fit": 0,
+    "colorMode": 2,
+    "tint": "#c47a9b",
+    "tint2": "#b8a0d8",
+    "backdrop": 0,
+    "speed": 0.7
+  }
+}

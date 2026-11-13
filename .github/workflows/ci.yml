@@ -1,0 +1,28 @@
+name: Build and test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      EGL_PLATFORM: surfaceless
+    steps:
+      - name: Check out sources
+        # actions/checkout v4.2.2, verified against GitHub's tag API.
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Install build and image-analysis dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential pkg-config git python3 ffmpeg libwayland-dev libegl1-mesa-dev libgles2-mesa-dev libpango1.0-dev fonts-dejavu-core python3-pil
+      - name: Build pinned engine and exercise package
+        run: make test

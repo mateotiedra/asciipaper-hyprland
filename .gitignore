@@ -1,0 +1,9 @@
+/build/
+__pycache__/
+*.py[cod]
+*.so
+*.o
+*.frames
+.env
+.env.*
+*.log
